@@ -9,6 +9,9 @@ const billRoutes = require('./routes/billRoutes');
 const materialRoutes = require('./routes/materialRoutes');
 const debrisRoutes = require('./routes/debrisRoutes');
 const authRoutes = require('./routes/authRoutes');
+//const uploadRouter = require('./routes/upload');
+
+
 
 // تحميل إعدادات البيئة
 dotenv.config();
@@ -48,7 +51,7 @@ app.use('/bills', billRoutes);
 app.use('/materials', materialRoutes);
 app.use('/debris', debrisRoutes);
 app.use('/auth', authRoutes);
-
+//app.use('/upload', uploadRouter);
 
 // التعامل مع الصفحات غير الموجودة (404)
 app.use((req, res, next) => {

@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const billController = require('../controllers/billController');
-const multer = require('multer')
+const upload = require('../utils/upload')
 
-//اعدادات multer
-const upload = multer({dist:'upload/'});
 
 
 //! get
@@ -29,7 +27,7 @@ router.get('/:id/invoice',billController.getBillByIdInvoice);
 
 //! post
 // إنشاء فاتورة جديدة
-router.post('/import',upload.single('excelFile',billController.importFromExcel))
+//router.post('/import',upload.upload.single('excel'),billController.importFromExcel)
 
 router.post('/', billController.createBill);
 
