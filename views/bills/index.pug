@@ -1,0 +1,57 @@
+extends ../layouts/main.pug
+
+block content
+  div(class="container mx-auto py-12 max-w-6xl")
+
+    // حقل البحث
+    //- form(action="/bills/search", method="GET", class="flex justify-between mb-8")
+    //-   input(type="text", class="w-full ml-5 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-teal-200", name="search", placeholder="ابحث عن فاتورة...")
+    //-   button(type="submit", class="ml-4 bg-teal-500 text-white p-3 px-6 rounded-lg hover:bg-teal-600 transition duration-300") بحث
+
+    // زر لإضافة فاتورة جديدة
+    div(class="flex justify-end mb-6")
+      a(href="/bills/create", class="text-white bg-cyan-600 p-3 px-6 rounded-lg hover:bg-cyan-700 transition duration-300 shadow-lg") إضافة فاتورة جديدة
+
+    // جدول الفواتير
+    div(class="overflow-x-auto")
+      table(class="min-w-full border border-teal-100 bg-white shadow-lg rounded-lg")
+        thead
+          tr(class="bg-teal-100 text-gray-700 text-left")
+            th(class="p-4 text-right") تاريخ الفاتورة
+            th(class="p-4 text-right") الطرف
+            th(class="p-4 text-right") نوع الفاتورة
+            th(class="p-4 text-right") المسؤول
+            th(class="p-4 text-right") القيد
+            th(class="p-4 text-right") الاسم
+            th(class="p-4 text-right") العدد
+            th(class="p-4 text-right") السعر بالدينار
+            th(class="p-4 text-right") السعر بالدولار
+            th(class="p-4 text-right") العمليات
+        tbody
+          if bills
+            each bill in bills
+              tr(class="hover:bg-gray-100 transition duration-300")
+                td(class="p-4 border-b")= bill.bill_date.toDateString()
+                td(class="p-4 border-b")= bill.party
+                td(class="p-4 border-b")= bill.type
+                td(class="p-4 border-b")= bill.responsible
+                td(class="p-4 border-b")= bill.restriction
+                td(class="p-4 border-b")= bill.name
+                td(class="p-4 border-b")= bill.count
+                td(class="p-4 border-b")= bill.diq_price
+                td(class="p-4 border-b")= bill.usd_price
+                td(class="p-4 border-b flex items-center justify-between space-x-4")
+                  a(href=`/bills/${bill._id}` , class="text-cyan-500 text-2xl hover:text-cyan-600 transition duration-300") 
+                    i(class="fas fa-circle-info") 
+                  br
+                  a(href=`/bills/${bill._id}/edit`, class="text-emerald-600 text-2xl hover:text-emerald-700 transition duration-300") 
+                    i(class="fas fa-edit")
+                  form(action=`/bills/${bill._id}/delete`, method="POST")
+                    button(type="submit", class="text-red-500 text-2xl hover:text-red-600 transition duration-300")
+                      i(class="fas fa-trash")
+                  a(href=`/bills/${bill._id}/invoice`, class="mr-4 text-teal-500 text-2xl hover:text-red-600 transition duration-300")  
+                    i(class="fa-solid fa-print")
+
+    // زر لإضافة فاتورة جديدة أسفل الصفحة
+    div(class="flex justify-end mt-8")
+      a(href="/bills/create", class="text-white bg-cyan-600 p-3 px-6 rounded-lg hover:bg-cyan-700 transition duration-300 shadow-lg") إضافة فاتورة جديدة

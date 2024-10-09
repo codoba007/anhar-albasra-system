@@ -1,0 +1,53 @@
+extends ../layouts/main.pug
+
+block content
+  h2(class="text-2xl mb-4") تعديل الفاتورة
+
+  form(action=`/bills/${bill._id}/edit`, method="post" class="space-y-4 bg-gray-50 p-6 rounded-md shadow-md")
+    label(for="bill_date" class="block mb-2 text-lg") تاريخ الفاتورة:
+    input(type="date", name="bill_date", value=bill.bill_date.toISOString().split('T')[0], required class="w-full p-2 border rounded-md")
+
+    label(for="party" class="block mb-2 text-lg") الطرف:
+    input(type="text", name="party", value=bill.party, required class="w-full p-2 border rounded-md")
+
+    label(for="type" class="block mb-2 text-lg") نوع الفاتورة:
+    select(name="type" required class="w-full p-2 border rounded-md")
+      option(value="صيانة", selected=bill.type === 'صيانة') صيانة
+      option(value="مشتريات", selected=bill.type === 'مشتريات') مشتريات
+      option(value="رواتب", selected=bill.type === 'رواتب') رواتب
+      option(value="عمال", selected=bill.type === 'عمال') عمال
+      option(value="بترول", selected=bill.type === 'بترول') بترول
+      option(value="أسفلت", selected=bill.type === 'أسفلت') أسفلت
+
+    label(for="responsible" class="block mb-2 text-lg") المسؤول:
+    input(type="text", name="responsible", value=bill.responsible, required class="w-full p-2 border rounded-md")
+
+    label(for="restriction" class="block mb-2 text-lg") القيد:
+    input(type="text", name="restriction", value=bill.restriction, required class="w-full p-2 border rounded-md")
+
+    label(for="name" class="block mb-2 text-lg") الاسم:
+    input(type="text", name="name", value=bill.name, required class="w-full p-2 border rounded-md")
+
+    label(for="count" class="block mb-2 text-lg") العدد:
+    input(type="text", name="count", value=bill.count, required class="w-full p-2 border rounded-md")
+
+    label(for="diq_price" class="block mb-2 text-lg") السعر بالدينار العراقي:
+    input(type="number", name="diq_price", value=bill.diq_price, required class="w-full p-2 border rounded-md")
+
+    label(for="usd_price" class="block mb-2 text-lg") السعر بالدولار الأمريكي:
+    input(type="number", name="usd_price", value=bill.usd_price, required class="w-full p-2 border rounded-md")
+
+    label(for="detail" class="block mb-2 text-lg") التفاصيل:
+    input(type="text", name="detail", value=bill.detail, class="w-full p-2 border rounded-md")
+
+    label(for="note" class="block mb-2 text-lg") ملاحظة:
+    input(type="text", name="note", value=bill.note, class="w-full p-2 border rounded-md")
+
+    label(for="vhicle_number" class="block mb-2 text-lg") رقم المركبة (اختياري):
+    input(type="text", name="vhicle_number", value=bill.vhicle_number, class="w-full p-2 border rounded-md")
+
+    button(type="submit" class="w-full bg-teal-500 text-white p-3 rounded-md mt-4") تعديل الفاتورة
+    
+      
+
+  a(href="/bills" class="block text-teal-600 mt-4") العودة إلى القائمة
