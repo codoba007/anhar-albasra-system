@@ -1,29 +1,11 @@
 const Bill = require('../models/Bill');
 
 // billController.js
-const importExcelToMongo = require('../utils/excelImport');
+
 const path = require('path');
 
 // دالة استيراد البيانات من Excel
-exports.importFromExcel = async (req, res) => {
-  try {
-    // تأكد أن الملف موجود في الطلب
-    if (!req.file) {
-      return res.status(400).json({ message: 'الرجاء تحميل ملف Excel.' });
-    }
 
-    // مسار الملف المرفوع
-    const filePath = path.join(__dirname, '../uploads', req.file.filename);
-
-    // استدعاء دالة استيراد البيانات
-    await importExcelToMongo(filePath);
-
-    res.status(200).json({ message: 'تم استيراد البيانات بنجاح!' });
-  } catch (error) {
-    console.error('خطأ في استيراد البيانات:', error);
-    res.status(500).json({ message: 'حدث خطأ أثناء استيراد البيانات.' });
-  }
-};
 
 // عرض كل الفواتير
 exports.getAllBills = async (req, res) => {
